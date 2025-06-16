@@ -65,7 +65,8 @@ const importantSeeds = [
   "Pepper Seed", "Mushroom Seed", "Grape Seed", "Mango Seed"
 ];
 const importantGears = [
-  "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Master Sprinkler"
+  "Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Master Sprinkler",
+  "Lightning Rod", "Friendship Pot"
 ];
 
 let notifiedAvailable = {};
