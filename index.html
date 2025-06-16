@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GAG Stack Live Tracker</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body { background: #23272b; color: #e6e6e6; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; }
+    .container { max-width: 700px; margin: 40px auto; background: #181c20; border-radius: 14px; box-shadow: 0 4px 16px #000a; padding: 30px 16px 16px 16px; }
+    h1 { text-align: center; color: #4be87a; margin-bottom: 14px; font-size: 2em; letter-spacing: 2px; }
+    .section { margin: 28px 0 14px 0; background: #23272b; border-radius: 8px; padding: 12px 10px 10px 10px; box-shadow: 0 2px 12px #0004; }
+    .section-title { color: #ffd700; font-weight: bold; font-size: 1.15em; margin-bottom: 4px; }
+    .restock { font-size: 1em; color: #49ff6e; margin-bottom: 10px; display: block; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 2px; background: #17191c; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 7px 6px; text-align: left; border-bottom: 1px solid #222; font-size: 1em; }
+    th { background: #202427; color: #4be87a; font-size: 1.02em; }
+    tr:last-child td { border-bottom: none; }
+    .footer { text-align: center; color: #888; margin-top: 24px; font-size: 0.94em; letter-spacing: 0.5px; }
+    .update-time { text-align: center; color: #b2ffc8; margin-bottom: 12px; font-size: 1em; }
+    #refresh-btn {
+      display: block;
+      margin: 0 auto 14px auto;
+      background: #202427;
+      color: #4be87a;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      padding: 7px 18px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #refresh-btn:hover { background: #2e3242; }
+    @media (max-width: 600px) { .container { padding: 10px 0; } th, td { padding: 6px 2px; font-size: 0.97em;} h1 { font-size: 1.3em; } }
+    .emoji { font-size: 1.2em; margin-right: 2px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>GAG Stack Live Tracker</h1>
+    <button id="refresh-btn" type="button">🔄 Refresh</button>
+    <div class="update-time" id="updateTime"></div>
+    <div id="sections"></div>
+    <div class="footer">&copy; 2025 GAG Stack Tracker &middot; Demo</div>
+  </div>
+  <script src="gagstack.js"></script>
+</body>
+</html>
