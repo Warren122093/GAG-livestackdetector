@@ -4,43 +4,100 @@
   <meta charset="UTF-8">
   <title>GAG Stack Live Tracker</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-    body { background: #23272b; color: #e6e6e6; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; }
-    .container { max-width: 700px; margin: 40px auto; background: #181c20; border-radius: 14px; box-shadow: 0 4px 16px #000a; padding: 30px 16px 16px 16px; }
-    h1 { text-align: center; color: #4be87a; margin-bottom: 14px; font-size: 2em; letter-spacing: 2px; }
-    .section { margin: 28px 0 14px 0; background: #23272b; border-radius: 8px; padding: 12px 10px 10px 10px; box-shadow: 0 2px 12px #0004; }
-    .section-title { color: #ffd700; font-weight: bold; font-size: 1.15em; margin-bottom: 4px; }
-    .restock { font-size: 1em; color: #49ff6e; margin-bottom: 10px; display: block; }
-    table { width: 100%; border-collapse: collapse; margin-bottom: 2px; background: #17191c; border-radius: 8px; overflow: hidden; }
-    th, td { padding: 7px 6px; text-align: left; border-bottom: 1px solid #222; font-size: 1em; }
-    th { background: #202427; color: #4be87a; font-size: 1.02em; }
-    tr:last-child td { border-bottom: none; }
-    .footer { text-align: center; color: #888; margin-top: 24px; font-size: 0.94em; letter-spacing: 0.5px; }
-    .update-time { text-align: center; color: #b2ffc8; margin-bottom: 12px; font-size: 1em; }
-    #refresh-btn {
-      display: block;
-      margin: 0 auto 14px auto;
-      background: #202427;
-      color: #4be87a;
-      border: none;
-      border-radius: 6px;
-      font-size: 1em;
-      padding: 7px 18px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    #refresh-btn:hover { background: #2e3242; }
-    @media (max-width: 600px) { .container { padding: 10px 0; } th, td { padding: 6px 2px; font-size: 0.97em;} h1 { font-size: 1.3em; } }
-    .emoji { font-size: 1.2em; margin-right: 2px; }
-  </style>
+  <meta name="description" content="Professional GAG Stack Live Tracker with notifications and responsive, mobile-first design.">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/616/616408.png" type="image/png">
+  <link rel="stylesheet" href="theme.css">
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav class="main-nav" id="mainNav">
+    <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Live Tracker" class="nav-icon">
+        Live Tracker
+      </a>
+      <a href="tool1.html" class="nav-link">
+        <img src="https://cdn-icons-png.flaticon.com/128/1159/1159633.png" alt="Tool 1" class="nav-icon">
+        Tool 1
+      </a>
+      <a href="tool2.html" class="nav-link">
+        <img src="https://cdn-icons-png.flaticon.com/128/1828/1828919.png" alt="Tool 2" class="nav-icon">
+        Tool 2
+      </a>
+      <a href="tool3.html" class="nav-link">
+        <img src="https://cdn-icons-png.flaticon.com/128/709/709496.png" alt="Tool 3" class="nav-icon">
+        Tool 3
+      </a>
+      <a href="javascript:void(0);" class="nav-link" id="aboutDevBtn">
+        <img src="https://cdn-icons-png.flaticon.com/128/1077/1077012.png" alt="About Dev" class="nav-icon">
+        About Dev
+      </a>
+    </div>
+  </nav>
   <div class="container">
     <h1>GAG Stack Live Tracker</h1>
-    <button id="refresh-btn" type="button">🔄 Refresh</button>
-    <div class="update-time" id="updateTime"></div>
-    <div id="sections"></div>
+    <div class="subtitle">Real-time item, egg & gear tracker with notifications. Responsive for all devices.</div>
+    <div style="text-align:center;margin-bottom:14px;">
+      <label style="font-size:1em;">
+        <input type="checkbox" id="importantNotifySwitch" checked>
+        🔔 Notify Important Only
+      </label>
+    </div>
+    <!-- Theme Changer -->
+    <div id="theme-changer" style="text-align:center;margin-bottom:14px;">
+      <label for="themeSelect" style="font-size:1em;color:var(--accent2);font-weight:600;">🎨 Theme:</label>
+      <select id="themeSelect" style="padding:4px 11px;margin-left:8px;border-radius:7px;background:var(--secondary-bg);color:var(--accent2);border:1px solid var(--accent2);">
+        <option value="dark">🌑 Dark</option>
+        <option value="light">🌕 Light</option>
+        <option value="blue">🔵 Blue</option>
+        <option value="green">🟢 Green</option>
+        <option value="pink">🌸 Pink</option>
+      </select>
+    </div>
+    <button id="refresh-btn" type="button" aria-label="Refresh Tracker">🔄 Refresh</button>
+    <div class="update-time" id="updateTime">Loading...</div>
+    <div class="sections" id="sections"></div>
     <div class="footer">&copy; 2025 GAG Stack Tracker &middot; Demo</div>
+    <div class="coded-by">
+      Coded by: Renkaku
+      <a href="https://www.facebook.com/renkakuwar" target="_blank" rel="noopener noreferrer">
+        fb: renkakuwar
+      </a>
+    </div>
+  </div>
+  <!-- Overlay Notification -->
+  <div id="importantOverlay">
+    <div>
+      <button id="overlayCloseBtn" style="
+        position:absolute;top:10px;right:20px;
+        background:none;border:none;color:#fff;font-size:2em;cursor:pointer;line-height:1;" aria-label="Close notification">&times;</button>
+      <div style="font-weight:bold;margin-bottom:12px;font-size:1.25em;">
+        🚨 Important Item(s) Available!
+      </div>
+      <div id="overlayAvailableList" style="font-size:1.12em;"></div>
+    </div>
+  </div>
+  <!-- About Dev Overlay -->
+  <div id="aboutDevOverlay">
+    <div>
+      <button id="aboutDevCloseBtn" style="
+        position:absolute;top:10px;right:20px;
+        background:none;border:none;color:#fff;font-size:2em;cursor:pointer;line-height:1;" aria-label="Close about dev overlay">&times;</button>
+      <div style="font-weight:bold;margin-bottom:10px;font-size:1.2em;">
+        👨‍💻 About the Developer
+      </div>
+      <div style="font-size:1.08em;line-height:1.7;">
+        Made by <b>Renkaku</b><br>
+        <span>BSIT Student, loves playing Grow a Garden.</span><br>
+        <span>
+          Link my FB:
+          <a href="https://www.facebook.com/renkakuwar" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);font-weight:bold;text-decoration:underline;">
+            message me
+          </a>
+        </span>
+      </div>
+    </div>
   </div>
   <script src="gagstack.js"></script>
 </body>
