@@ -13,74 +13,79 @@
 </head>
 <body>
   <!-- Navigation Bar -->
-  <nav class="main-nav" id="mainNav">
-    <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu">&#9776;</button>
-    <div class="nav-links">
-      <a href="index.html" class="nav-link active">
-        <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Live Tracker" class="nav-icon">
-        Live Tracker
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#2d6cdf;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Live Tracker" width="32" height="32" class="d-inline-block align-text-top">
+        GAG Stack Live Tracker
       </a>
-      <a href="tool1.html" class="nav-link">
-        <img src="https://cdn-icons-png.flaticon.com/128/1159/1159633.png" alt="Tool 1" class="nav-icon">
-        Tool 1
-      </a>
-      <a href="tool2.html" class="nav-link">
-        <img src="https://cdn-icons-png.flaticon.com/128/1828/1828919.png" alt="Tool 2" class="nav-icon">
-        Tool 2
-      </a>
-      <a href="tool3.html" class="nav-link">
-        <img src="https://cdn-icons-png.flaticon.com/128/709/709496.png" alt="Tool 3" class="nav-icon">
-        Tool 3
-      </a>
-      <a href="javascript:void(0);" class="nav-link" id="aboutDevBtn">
-        <img src="https://cdn-icons-png.flaticon.com/128/1077/1077012.png" alt="About Dev" class="nav-icon">
-        About Dev
-      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html"><i class="bi bi-lightning"></i> Live Tracker</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tool1.html"><i class="bi bi-tools"></i> Tool 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tool2.html"><i class="bi bi-egg-fried"></i> Tool 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tool3.html"><i class="bi bi-flower1"></i> Tool 3</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0);" id="aboutDevBtn"><i class="bi bi-person-circle"></i> About Dev</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
-  <div class="container">
-    <h1>GAG Stack Live Tracker</h1>
-    <div class="subtitle">Real-time item, egg & gear tracker with notifications. Responsive for all devices.</div>
-    <div style="text-align:center;margin-bottom:14px;">
-      <label style="font-size:1em;">
-        <input type="checkbox" id="importantNotifySwitch" checked>
-        🔔 Notify Important Only
-      </label>
+
+  <main class="main-container d-flex flex-column align-items-center justify-content-center">
+    <div class="card shadow-lg p-4 my-4" style="max-width: 700px; width:100%; background: var(--card-color);">
+      <h1 class="mb-3 fw-bold text-center" style="color:var(--primary-color);">GAG Stack Live Tracker</h1>
+      <div class="subtitle text-center mb-3" style="color:var(--accent-color);">Real-time item, egg & gear tracker with notifications. Responsive for all devices.</div>
+      <div class="mb-3 text-center">
+        <label style="font-size:1em;">
+          <input type="checkbox" id="importantNotifySwitch" checked>
+          🔔 Notify Important Only
+        </label>
+      </div>
+      <button id="refresh-btn" class="btn btn-primary w-100 mb-3" type="button" aria-label="Refresh Tracker"><i class="bi bi-arrow-repeat"></i> Refresh</button>
+      <div class="update-time text-center mb-2" id="updateTime">Loading...</div>
+      <div class="mb-2 text-center">
+        <span id="apiStatus" style="font-weight:bold;color:#2d6cdf;">API: Checking...</span>
+      </div>
+      <div class="sections" id="sections"></div>
     </div>
-    <!-- Theme changer removed -->
-    <button id="refresh-btn" type="button" aria-label="Refresh Tracker">🔄 Refresh</button>
-    <div class="update-time" id="updateTime">Loading...</div>
-    <!-- API Status Indicator -->
-    <div style="text-align:center;margin-top:6px;">
-      <span id="apiStatus" style="font-weight:bold;color:var(--online);">API: Checking...</span>
-    </div>
-    <div class="sections" id="sections"></div>
-    <div class="footer">&copy; 2025 GAG Stack Tracker &middot; Demo</div>
-    <div class="coded-by">
+    <footer class="footer mt-2 text-center">
+      &copy; 2025 GAG Stack Tracker &middot; Demo<br>
       Coded by: Renkaku
-      <a href="https://www.facebook.com/renkakuwar" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.facebook.com/renkakuwar" target="_blank" rel="noopener noreferrer" style="color:var(--primary-color);font-weight:600;">
         fb: renkakuwar
       </a>
-    </div>
-  </div>
+    </footer>
+  </main>
+
   <!-- Overlay Notification -->
-  <div id="importantOverlay">
-    <div>
-      <button id="overlayCloseBtn" style="
-        position:absolute;top:10px;right:20px;
-        background:none;border:none;color:#fff;font-size:2em;cursor:pointer;line-height:1;" aria-label="Close notification">&times;</button>
+  <div id="importantOverlay" style="display:none;position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;">
+    <div style="background:var(--card-color);color:var(--primary-color);border-radius:12px;padding:28px 22px 18px 22px;box-shadow:0 4px 32px #000b;max-width:98vw;max-height:88vh;overflow-y:auto;text-align:center;position:relative;">
+      <button id="overlayCloseBtn" style="position:absolute;top:10px;right:20px;background:none;border:none;color:#333;font-size:2em;cursor:pointer;line-height:1;" aria-label="Close notification">&times;</button>
       <div style="font-weight:bold;margin-bottom:12px;font-size:1.25em;">
         🚨 Important Item(s) Available!
       </div>
       <div id="overlayAvailableList" style="font-size:1.12em;"></div>
     </div>
   </div>
+
   <!-- About Dev Overlay -->
-  <div id="aboutDevOverlay">
-    <div>
-      <button id="aboutDevCloseBtn" style="
-        position:absolute;top:10px;right:20px;
-        background:none;border:none;color:#fff;font-size:2em;cursor:pointer;line-height:1;" aria-label="Close about dev overlay">&times;</button>
+  <div id="aboutDevOverlay" style="display:none;position:fixed;z-index:10000;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;">
+    <div style="background:var(--card-color);color:var(--primary-color);border-radius:12px;padding:28px 22px 18px 22px;box-shadow:0 4px 32px #000b;max-width:96vw;max-height:90vh;overflow-y:auto;text-align:center;position:relative;font-size:1.07em;">
+      <button id="aboutDevCloseBtn" style="position:absolute;top:10px;right:20px;background:none;border:none;color:#333;font-size:2em;cursor:pointer;line-height:1;" aria-label="Close about dev overlay">&times;</button>
       <div style="font-weight:bold;margin-bottom:10px;font-size:1.2em;">
         👨‍💻 About the Developer
       </div>
@@ -89,13 +94,16 @@
         <span>BSIT Student, loves playing Grow a Garden.</span><br>
         <span>
           Link my FB:
-          <a href="https://www.facebook.com/renkakuwar" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);font-weight:bold;text-decoration:underline;">
+          <a href="https://www.facebook.com/renkakuwar" target="_blank" rel="noopener noreferrer" style="color:var(--primary-color);font-weight:bold;text-decoration:underline;">
             message me
           </a>
         </span>
       </div>
     </div>
   </div>
+
+  <!-- Bootstrap JS Bundle (for navbar toggling) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="gagstack.js"></script>
 </body>
 </html>
