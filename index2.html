@@ -1,1 +1,109 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GAG Stack Live Tracker</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Professional GAG Stack Live Tracker with notifications and responsive, mobile-first design.">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/616/616408.png" type="image/png">
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="main-nav" id="mainNav">
+    <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Live Tracker" class="nav-icon">
+        Live Tracker
+      </a>
+      <a href="tool1.html" class="nav-link">
+        <img src="https://cdn-icons-png.flaticon.com/128/1159/1159633.png" alt="Tool 1" class="nav-icon">
+        Tool 1
+      </a>
+      <a href="tool2.html" class="nav-link">
+        <img src="https://cdn-icons-png.flaticon.com/128/1828/1828919.png" alt="Tool 2" class="nav-icon">
+        Tool 2
+      </a>
+      <a href="tool3.html" class="nav-link">
+        <img src="https://cdn-icons-png.flaticon.com/128/709/709496.png" alt="Tool 3" class="nav-icon">
+        Tool 3
+      </a>
+      <a href="javascript:void(0);" class="nav-link" id="aboutDevBtn">
+        <img src="https://cdn-icons-png.flaticon.com/128/1077/1077012.png" alt="About Dev" class="nav-icon">
+        About Dev
+      </a>
+    </div>
+  </nav>
+  <div class="container">
+    <h1>GAG Stack Live Tracker</h1>
+    <div class="subtitle">Real-time item, egg & gear tracker with notifications. Responsive for all devices.</div>
+    <div style="text-align:center;margin-bottom:14px;">
+      <label style="font-size:1em;">
+        <input type="checkbox" id="importantNotifySwitch" checked>
+        🔔 Notify Important Only
+      </label>
+    </div>
+    <!-- Theme Changer -->
+    <div id="theme-changer" style="text-align:center;margin-bottom:14px;">
+      <label for="themeSelect" style="font-size:1em;color:var(--accent2);font-weight:600;">🎨 Theme:</label>
+      <select id="themeSelect" style="padding:4px 11px;margin-left:8px;border-radius:7px;background:var(--secondary-bg);color:var(--accent2);border:1px solid var(--accent2);">
+        <option value="main">🌟 Main</option>
+        <option value="light">🌕 Light</option>
+        <option value="blue">🔵 Blue</option>
+        <option value="green">🟢 Green</option>
+        <option value="pink">🌸 Pink</option>
+      </select>
+    </div>
+    <button id="refresh-btn" type="button" aria-label="Refresh Tracker">🔄 Refresh</button>
+    <div class="update-time" id="updateTime">Loading...</div>
+    <!-- API Status Indicator -->
+    <div style="text-align:center;margin-top:6px;">
+      <span id="apiStatus" style="font-weight:bold;color:var(--online);">API: Checking...</span>
+    </div>
+    <div class="sections" id="sections"></div>
+    <div class="footer">&copy; 2025 GAG Stack Tracker &middot; Demo</div>
+    <div class="coded-by">
+      Coded by: Renkaku
+      <a href="https://www.facebook.com/renkakuwar" target="_blank" rel="noopener noreferrer">
+        fb: renkakuwar
+      </a>
+    </div>
+  </div>
+  <!-- Overlay Notification -->
+  <div id="importantOverlay">
+    <div>
+      <button id="overlayCloseBtn" style="
+        position:absolute;top:10px;right:20px;
+        background:none;border:none;color:#fff;font-size:2em;cursor:pointer;line-height:1;" aria-label="Close notification">&times;</button>
+      <div style="font-weight:bold;margin-bottom:12px;font-size:1.25em;">
+        🚨 Important Item(s) Available!
+      </div>
+      <div id="overlayAvailableList" style="font-size:1.12em;"></div>
+    </div>
+  </div>
+  <!-- About Dev Overlay -->
+  <div id="aboutDevOverlay">
+    <div>
+      <button id="aboutDevCloseBtn" style="
+        position:absolute;top:10px;right:20px;
+        background:none;border:none;color:#fff;font-size:2em;cursor:pointer;line-height:1;" aria-label="Close about dev overlay">&times;</button>
+      <div style="font-weight:bold;margin-bottom:10px;font-size:1.2em;">
+        👨‍💻 About the Developer
+      </div>
+      <div style="font-size:1.08em;line-height:1.7;">
+        Made by <b>Renkaku</b><br>
+        <span>BSIT Student, loves playing Grow a Garden.</span><br>
+        <span>
+          Link my FB:
+          <a href="https://www.facebook.com/renkakuwar" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);font-weight:bold;text-decoration:underline;">
+            message me
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+  <script src="gagstack.js"></script>
+</body>
+</html>
