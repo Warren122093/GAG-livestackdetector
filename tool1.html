@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>GAG Stack Live Tracker</title>
+  <title>GAG Stock Tool 1</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Professional GAG Stack Live Tracker with notifications and responsive, mobile-first design.">
+  <meta name="description" content="Grow a Garden - Tool 1: Live Stock Viewer">
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/616/616408.png" type="image/png">
   <link rel="stylesheet" href="theme.css">
 </head>
@@ -13,11 +13,11 @@
   <nav class="main-nav" id="mainNav">
     <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu">&#9776;</button>
     <div class="nav-links">
-      <a href="index.html" class="nav-link active">
+      <a href="index.html" class="nav-link">
         <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Live Tracker" class="nav-icon">
         Live Tracker
       </a>
-      <a href="tool1.html" class="nav-link">
+      <a href="tool1.html" class="nav-link active">
         <img src="https://cdn-icons-png.flaticon.com/128/1159/1159633.png" alt="Tool 1" class="nav-icon">
         Tool 1
       </a>
@@ -36,33 +36,13 @@
     </div>
   </nav>
   <div class="container">
-    <h1>GAG Stack Live Tracker</h1>
-    <div class="subtitle">Real-time item, egg & gear tracker with notifications. Responsive for all devices.</div>
-    <div style="text-align:center;margin-bottom:14px;">
-      <label style="font-size:1em;">
-        <input type="checkbox" id="importantNotifySwitch" checked>
-        🔔 Notify Important Only
-      </label>
-    </div>
-    <!-- Theme Changer -->
-    <div id="theme-changer" style="text-align:center;margin-bottom:14px;">
-      <label for="themeSelect" style="font-size:1em;color:var(--accent2);font-weight:600;">🎨 Theme:</label>
-      <select id="themeSelect" style="padding:4px 11px;margin-left:8px;border-radius:7px;background:var(--secondary-bg);color:var(--accent2);border:1px solid var(--accent2);">
-        <option value="dark">🌑 Dark</option>
-        <option value="light">🌕 Light</option>
-        <option value="blue">🔵 Blue</option>
-        <option value="green">🟢 Green</option>
-        <option value="pink">🌸 Pink</option>
-      </select>
-    </div>
-    <button id="refresh-btn" type="button" aria-label="Refresh Tracker">🔄 Refresh</button>
+    <h1>GAG Stock Tool 1</h1>
+    <div class="subtitle">Simple, clean stock list from growagardenstock.com</div>
+    <button id="refresh-btn" type="button" aria-label="Refresh Tool 1">🔄 Refresh</button>
     <div class="update-time" id="updateTime">Loading...</div>
-    <!-- API Status Indicator -->
-    <div style="text-align:center;margin-top:6px;">
-      <span id="apiStatus" style="font-weight:bold;color:var(--online);">API: Checking...</span>
-    </div>
+    <div id="apiStatus" style="font-weight:bold;margin:10px 0 16px 0;">API: Checking...</div>
     <div class="sections" id="sections"></div>
-    <div class="footer">&copy; 2025 GAG Stack Tracker &middot; Demo</div>
+    <div class="footer">&copy; 2025 GAG Stock Tool 1 &middot; Demo</div>
     <div class="coded-by">
       Coded by: Renkaku
       <a href="https://www.facebook.com/renkakuwar" target="_blank" rel="noopener noreferrer">
@@ -70,25 +50,13 @@
       </a>
     </div>
   </div>
-  <!-- Overlay Notification -->
-  <div id="importantOverlay">
-    <div>
-      <button id="overlayCloseBtn" style="
-        position:absolute;top:10px;right:20px;
-        background:none;border:none;color:#fff;font-size:2em;cursor:pointer;line-height:1;" aria-label="Close notification">&times;</button>
-      <div style="font-weight:bold;margin-bottom:12px;font-size:1.25em;">
-        🚨 Important Item(s) Available!
-      </div>
-      <div id="overlayAvailableList" style="font-size:1.12em;"></div>
-    </div>
-  </div>
   <!-- About Dev Overlay -->
-  <div id="aboutDevOverlay">
-    <div>
+  <div id="aboutDevOverlay" style="display:none;z-index:1000;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,20,40,0.90);align-items:center;justify-content:center;">
+    <div style="background:#2e1847;padding:30px 25px 18px 25px;border-radius:13px;position:relative;box-shadow:0 2px 14px #000c;">
       <button id="aboutDevCloseBtn" style="
         position:absolute;top:10px;right:20px;
         background:none;border:none;color:#fff;font-size:2em;cursor:pointer;line-height:1;" aria-label="Close about dev overlay">&times;</button>
-      <div style="font-weight:bold;margin-bottom:10px;font-size:1.2em;">
+      <div style="font-weight:bold;margin-bottom:12px;font-size:1.2em;">
         👨‍💻 About the Developer
       </div>
       <div style="font-size:1.08em;line-height:1.7;">
@@ -103,6 +71,6 @@
       </div>
     </div>
   </div>
-  <script src="gagstack.js"></script>
+  <script src="tool1.js"></script>
 </body>
 </html>
