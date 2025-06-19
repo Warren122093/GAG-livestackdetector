@@ -2,95 +2,226 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>GAG Stack Live Tracker - Maintenance</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="GAG Stack Live Tracker is currently undergoing maintenance. Please check back soon.">
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/616/616408.png" type="image/png">
+  <title>Sign In - Daily Key</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap 5 CSS and Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <style>
-    body {
-      background: linear-gradient(135deg, #e0e7ff 0%, #f5f7fa 100%);
-      min-height: 100vh;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #18191a;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    :root {
+      --primary-color: #2d6cdf;
+      --background-color: #e0e7ff;
+      --text-color: #18191a;
+      --card-color: #fff;
+      --input-color: #f5f7fa;
+      --accent-color: #6c757d;
     }
-    .maintenance-container {
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--background-color) 0%, var(--input-color) 100%);
+      color: var(--text-color);
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    .main-container {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
     }
-    .maintenance-card {
-      background: #fff;
-      border-radius: 1.2rem;
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.13);
-      padding: 2.5rem 2rem 2rem 2rem;
-      max-width: 390px;
+
+    .signin-card {
+      max-width: 400px;
       width: 100%;
-      text-align: center;
+      border: none;
+      border-radius: 1.2rem;
+      background: var(--card-color);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.13);
+      margin-top: 3rem;
     }
-    .maintenance-icon {
-      font-size: 3rem;
-      color: #2d6cdf;
+
+    .signin-icon {
+      font-size: 2.4rem;
+      color: var(--primary-color);
       background: #fff;
       border-radius: 50%;
-      padding: 0.4em;
-      box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.09);
-      margin-bottom: 1rem;
+      padding: 0.3em;
+      box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.1);
     }
-    .maintenance-title {
-      font-size: 1.45rem;
+
+    #key-input {
+      font-size: 1.18rem;
+      letter-spacing: 0.05em;
+      padding: 0.8em 1em;
+      background: var(--input-color);
+      border: 1px solid #dde3ea;
+      border-radius: 8px;
+      transition: border-color 0.2s;
+    }
+
+    #key-input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px var(--primary-color)33;
+      outline: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      border: none;
       font-weight: bold;
-      color: #2d6cdf;
-      margin-bottom: 0.8rem;
+      letter-spacing: 0.03em;
+      font-size: 1rem;
+      transition: background 0.3s;
     }
-    .maintenance-desc {
-      font-size: 1.13rem;
-      margin-bottom: 1.2rem;
-      color: #444;
+
+    .btn-primary:hover, .btn-primary:focus {
+      background-color: #144cb8;
     }
+
+    .btn-outline-secondary {
+      border-radius: 2em;
+    }
+
+    .form-check-label {
+      font-size: 0.97rem;
+      color: var(--accent-color);
+    }
+
     .footer {
-      color: #6c757d;
-      font-size: 0.98rem;
+      color: var(--accent-color);
+      font-size: 0.97rem;
       margin-top: 2rem;
     }
+
     @media (max-width: 480px) {
-      .maintenance-card {
+      .signin-card {
         padding: 1.5rem 0.7rem;
         margin-top: 1.5rem;
       }
-      .maintenance-title { font-size: 1.08rem; }
-      .maintenance-desc { font-size: 1em; }
+      .main-container {
+        padding: 0 0.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="maintenance-container">
-    <div class="maintenance-card">
-      <div class="maintenance-icon mb-2">
-        <i class="bi bi-tools"></i>
+  <div class="main-container">
+    <div class="card signin-card p-4 mx-auto">
+      <div class="text-center mb-3">
+        <i class="bi bi-key-fill signin-icon"></i>
       </div>
-      <div class="maintenance-title">Maintenance in Progress</div>
-      <div class="maintenance-desc">
-        The GAG Stack Live Tracker is currently undergoing scheduled maintenance.<br>
-        Please check back soon.<br>
-        <span class="text-muted" style="font-size:0.97em;">Thank you for your patience!</span>
-      </div>
-      <div>
-        <i class="bi bi-clock-history" style="color:#6c757d;font-size:1.2em;"></i>
-        <span style="color:#6c757d; font-size:0.98em;">Last update: June 19, 2025</span>
+      <h2 class="mb-3 fw-bold text-center">Sign In with Daily Key</h2>
+      <form id="signin-form" autocomplete="off">
+        <input type="password" class="form-control mb-3 text-center" id="key-input" placeholder="Enter today's key..." required autocomplete="off">
+        <div class="form-check mb-3 text-start">
+          <input class="form-check-input" type="checkbox" value="" id="save-key">
+          <label class="form-check-label" for="save-key">
+            Remember key for this browser
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">
+          <i class="bi bi-box-arrow-in-right"></i> Sign In
+        </button>
+      </form>
+      <div id="signin-message" class="mt-3"></div>
+      <div class="mt-3 text-center">
+        <a href="https://iptvphkey.pages.dev/" target="_blank" class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-link-45deg"></i> Get Today's Key
+        </a>
       </div>
     </div>
     <footer class="footer mt-4 text-center">
       <span><i class="bi bi-person-circle"></i> Made by renkaku</span>
     </footer>
   </div>
+  <script>
+    let todayKey = '';
+    let todayKeyDate = '';
+
+    function getTodayKeyDate() {
+      const now = new Date();
+      const yyyy = now.getUTCFullYear();
+      const mm = String(now.getUTCMonth() + 1).padStart(2, '0');
+      const dd = String(now.getUTCDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}`;
+    }
+
+    async function fetchTodayKey() {
+      todayKeyDate = getTodayKeyDate();
+      const fileName = `${todayKeyDate}.txt`;
+      const url = `https://raw.githubusercontent.com/Warren122093/iptvphkey/main/keys/${fileName}`;
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Key not found.");
+        todayKey = (await response.text()).trim();
+      } catch {
+        todayKey = '';
+      }
+    }
+
+    function saveKeyForToday(key) {
+      if (!todayKeyDate) todayKeyDate = getTodayKeyDate();
+      localStorage.setItem('savedKeyDate', todayKeyDate);
+      localStorage.setItem('savedKeyValue', key);
+    }
+
+    function getSavedKeyForToday() {
+      const savedDate = localStorage.getItem('savedKeyDate');
+      const savedValue = localStorage.getItem('savedKeyValue');
+      const nowDate = getTodayKeyDate();
+      if (savedDate === nowDate && savedValue) {
+        return savedValue;
+      }
+      // If previous date, clear old key
+      localStorage.removeItem('savedKeyDate');
+      localStorage.removeItem('savedKeyValue');
+      return null;
+    }
+
+    function redirectToMain() {
+      window.location.href = "index2.html";
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const form = document.getElementById("signin-form");
+      const keyInput = document.getElementById("key-input");
+      const saveKeyCheck = document.getElementById("save-key");
+      const message = document.getElementById("signin-message");
+
+      await fetchTodayKey();
+
+      // Auto signin if saved key matches today's key
+      const savedKey = getSavedKeyForToday();
+      if (savedKey && todayKey && savedKey === todayKey) {
+        message.innerHTML = `<div class="alert alert-success"><i class="bi bi-check-circle"></i> Signed in automatically! Redirecting...</div>`;
+        setTimeout(redirectToMain, 800);
+        return;
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        message.innerHTML = '';
+
+        if (!todayKey) {
+          message.innerHTML = `<div class="alert alert-warning"><i class="bi bi-exclamation-triangle"></i> Unable to verify key. Please try again later.</div>`;
+          return;
+        }
+
+        if (keyInput.value.trim() === todayKey) {
+          if (saveKeyCheck.checked) {
+            saveKeyForToday(todayKey);
+          }
+          message.innerHTML = `<div class="alert alert-success"><i class="bi bi-check-circle"></i> Sign in successful! Redirecting...</div>`;
+          setTimeout(redirectToMain, 800);
+        } else {
+          message.innerHTML = `<div class="alert alert-danger"><i class="bi bi-x-circle"></i> Key is not correct.</div>`;
+        }
+        keyInput.value = '';
+      });
+    });
+  </script>
 </body>
 </html>
