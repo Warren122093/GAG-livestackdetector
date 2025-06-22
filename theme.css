@@ -627,3 +627,32 @@ html[data-theme="light"] #aboutDevCloseBtn svg {
     font-size: 1.7em !important;
   }
 }
+.section-content.weather-content .row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 6px 0;
+  border-bottom: 1px solid #ededed;
+  font-size: 1em;
+}
+.section-content.weather-content .cell.label {
+  min-width: 110px;
+  font-weight: bold;
+  color: var(--primary-color, #2d6cdf);
+  flex-shrink: 0;
+}
+.section-content.weather-content .cell.value {
+  flex: 1;
+  color: var(--text-color, #18191a);
+  word-break: break-word;
+}
+@media (max-width: 600px) {
+  .section-content.weather-content .row {
+    flex-direction: column;
+    padding: 8px 0;
+  }
+  .section-content.weather-content .cell.label {
+    min-width: 0;
+    padding-bottom: 2px;
+  }
+}
