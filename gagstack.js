@@ -1,8 +1,3 @@
-// --- Block access to index2.html if not signed in via sessionStorage ---
-if (sessionStorage.getItem("gagstack_signedin") !== "yes") {
-  window.location.replace("index.html");
-}
-
 // Navigation toggle
 const navToggle = document.getElementById("navToggle");
 const mainNav = document.getElementById("mainNav");
@@ -36,8 +31,8 @@ themeSelect.addEventListener("change", function () {
     setTheme(theme);
     themeSelect.value = theme;
   } else {
-    setTheme("main");
-    themeSelect.value = "main";
+    setTheme("dark");
+    themeSelect.value = "dark";
   }
 })();
 
@@ -63,11 +58,12 @@ if ("Notification" in window && Notification.permission !== "granted") {
 const importantHoney = [];
 const importantEggs = ["Bug Egg", "Rare Egg", "Legendary Egg", "Mythical Egg"];
 const importantSeeds = [
-  "Ember Lily Seed", "Sugar Apple Seed", "Beanstalk Seed", "Cacao Seed", "Pepper Seed", "Mushroom Seed", "Grape Seed",
-  "Elephant Ears", "Rosy Delight", "Parasol Flower", "Cantaloupe", "Pear", "Wild Carrot",
-  "Mango Seed", "Green Apple", "Avocado", "Banana", "Pineapple", "Bell Pepper", "Prickly Pear", "Kiwi", "Feijoa", "Loquat"
+  "Ember Lily Seed", "Sugar Apple Seed", "Beanstalk Seed", "Cacao Seed", "Pepper Seed", "Mushroom Seed", "Grape Seed", "Elephant Ears",
+  "Rosy Delight", "Parasol Flower", "Cantaloupe", "Pear", "Wild Carrot", "Mango Seed", "Green Apple", "Avocado", "Banana", "Pineapple",
+  "Bell Pepper", "Prickly Pear", "Kiwi", "Feijoa", "Loquat"
 ];
 const importantGears = ["Basic Sprinkler", "Advanced Sprinkler", "Godly Sprinkler", "Master Sprinkler", "Lightning Rod", "Tanning Mirror", "Friendship Pot"];
+
 let notifiedAvailable = {};
 
 // Emoji mapping
@@ -122,15 +118,31 @@ const emojis = {
   "Bunny Ears": '🐰',
   "Pumpkin Mask": '🎭',
   "Cherry Blossom Pin": '🌸',
-  // Summer update/new seeds
-  "Banana": "🍌", "Pineapple": "🍍", "Kiwi": "🥝", "Bell Pepper": "🫑", "Prickly Pear": "🌵", "Avocado": "🥑",
-  "Green Apple": "🍏", "Cauliflower": "🥦", "Pear": "🍐", "Cantaloupe": "🍈", "Wild Carrot": "🥕", "Loquat": "🍑",
-  "Feijoa": "🥝", "Elephant Ears": "🌿", "Rosy Delight": "🌸", "Parasol Flower": "🌼"
+  "Banana": "🍌",
+  "Pineapple": "🍍",
+  "Kiwi": "🥝",
+  "Bell Pepper": "🫑",
+  "Prickly Pear": "🌵",
+  "Avocado": "🥑",
+  "Green Apple": "🍏",
+  "Cauliflower": "🥦",
+  "Pear": "🍐",
+  "Cantaloupe": "🍈",
+  "Wild Carrot": "🥕",
+  "Loquat": "🍑",
+  "Feijoa": "🥝",
+  "Elephant Ears": "🌿",
+  "Rosy Delight": "🌸",
+  "Parasol Flower": "🌼"
 };
 
 // Utility functions
-function pad(num) { return num < 10 ? '0' + num : num; }
-function getPHTime() { return new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Manila" })); }
+function pad(num) {
+  return num < 10 ? '0' + num : num;
+}
+function getPHTime() {
+  return new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Manila" }));
+}
 function getCountdown(targetDate) {
   const now = getPHTime();
   const ms = targetDate - now;
@@ -147,25 +159,31 @@ function getNextRestocks() {
   const eggDate = new Date(now);
   eggDate.setSeconds(0, 0);
   if (now.getMinutes() < 30) eggDate.setMinutes(30);
-  else { eggDate.setHours(now.getHours() + 1); eggDate.setMinutes(0); }
+  else {
+    eggDate.setHours(now.getHours() + 1);
+    eggDate.setMinutes(0);
+  }
   restocks.egg = getCountdown(eggDate);
+
   // Gear/Seeds: every 5 minutes
   const gearDate = new Date(now);
   const next5 = Math.ceil((now.getMinutes() + (now.getSeconds() > 0 ? 1 : 0)) / 5) * 5;
   gearDate.setSeconds(0, 0);
-  if (next5 === 60) { gearDate.setHours(now.getHours() + 1); gearDate.setMinutes(0); }
-  else { gearDate.setMinutes(next5); }
+  if (next5 === 60) {
+    gearDate.setHours(now.getHours() + 1);
+    gearDate.setMinutes(0);
+  } else {
+    gearDate.setMinutes(next5);
+  }
   restocks.gear = restocks.seed = getCountdown(gearDate);
-  // Honey: every hour
-  const honeyDate = new Date(now);
-  honeyDate.setHours(now.getHours() + 1, 0, 0, 0);
-  restocks.honey = getCountdown(honeyDate);
+
   // Cosmetics: every 7 hours
   const cosDate = new Date(now);
   const hourFloat = now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
   const next7 = Math.ceil(hourFloat / 7) * 7;
   cosDate.setHours(next7, 0, 0, 0);
   restocks.cosmetics = getCountdown(cosDate);
+
   return restocks;
 }
 function formatValue(val) {
@@ -212,7 +230,6 @@ function sectionLabel(section) {
     case "gear": return "Gear";
     case "seed": return "Seed";
     case "egg": return "Egg";
-    case "honey": return "Honey";
     case "cosmetics": return "Cosmetics";
     default: return section;
   }
@@ -232,12 +249,12 @@ async function fetchAndRender() {
       { label: "🛠️ Gear", emoji: "🛠️", sectionKey: "gear", rows: data.gear.items, restock: restocks.gear },
       { label: "🌱 Seeds", emoji: "🌱", sectionKey: "seed", rows: data.seed.items, restock: restocks.seed },
       { label: "🥚 Eggs", emoji: "🥚", sectionKey: "egg", rows: data.egg.items, restock: restocks.egg },
-      { label: "🎨 Cosmetics", emoji: "🎨", sectionKey: "cosmetics", rows: data.cosmetics.items, restock: restocks.cosmetics },
-      { label: "🍯 Honey", emoji: "🍯", sectionKey: "honey", rows: data.honey.items, restock: restocks.honey }
+      { label: "🎨 Cosmetics", emoji: "🎨", sectionKey: "cosmetics", rows: data.cosmetics.items, restock: restocks.cosmetics }
+      // 🍯 Honey section removed
     ];
 
     let importantAvailable = [];
-    ["gear", "seed", "egg", "cosmetics", "honey"].forEach(sectionKey => {
+    ["gear", "seed", "egg", "cosmetics"].forEach(sectionKey => {
       (data[sectionKey]?.items || []).forEach(item => {
         const notify = shouldNotify(sectionKey, item.name);
         const qty = Number(item.quantity);
@@ -269,7 +286,7 @@ async function fetchAndRender() {
             <tbody>
               ${section.rows.map(row =>
                 `<tr>
-                  <td data-label="Item">${emojis[row.name] ? `<span class="emoji">${emojis[row.name]}</span>` : ''}${row.name}</td>
+                  <td>${emojis[row.name] ? `<span class="emoji">${emojis[row.name]}</span>` : ''}${row.name}</td>
                   <td data-label="Qty Available">${formatValue(Number(row.quantity))}</td>
                   <td data-label="Price">${getItemPrice(row)}</td>
                 </tr>`
@@ -299,9 +316,7 @@ async function fetchAndRender() {
       }
       sectionsEl.appendChild(div);
     }
-    updateTimeEl.textContent = "Last updated: " + new Date(new Date().toLocaleString("en-US", {
-      timeZone: "Asia/Manila"
-    })).toLocaleTimeString("en-PH", {
+    updateTimeEl.textContent = "Last updated: " + getPHTime().toLocaleTimeString("en-PH", {
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit"
@@ -312,6 +327,68 @@ async function fetchAndRender() {
   setTimeout(() => {
     window.scrollTo(0, scrollY);
   }, 0);
+}
+
+// Weather section
+async function fetchAndRenderWeatherSection() {
+  const weatherEl = document.getElementById("weatherSection");
+  weatherEl.innerHTML = `
+    <div class="section-title"><span class="emoji">⏳</span>Weather</div>
+    <div>Loading...</div>
+  `;
+  try {
+    // Use a public CORS proxy
+    const corsProxy = "https://corsproxy.io/?";
+    const apiUrl = "https://growagardenstock.com/api/stock/weather";
+    const res = await fetch(corsProxy + encodeURIComponent(apiUrl));
+    if (!res.ok) throw new Error("Failed to fetch weather");
+    const weather = await res.json();
+
+    let updatedStr = "Unknown";
+    if (weather.updatedAt) {
+      updatedStr = typeof weather.updatedAt === "number"
+        ? new Date(weather.updatedAt).toLocaleString()
+        : weather.updatedAt;
+    }
+
+    weatherEl.innerHTML = `
+      <div class="section-title"><span class="emoji">${weather.icon || "🌤️"}</span>Weather</div>
+      <table>
+        <tbody>
+          <tr>
+            <td style="font-weight:bold;">Status</td>
+            <td data-label="Status">${weather.currentWeather || weather.weatherType || "Unknown"}</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold;">Description</td>
+            <td data-label="Description">${weather.description || weather.effectDescription || "None"}</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold;">Crop Bonus</td>
+            <td data-label="Crop Bonus">${weather.cropBonuses || "None"}</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold;">Rarity</td>
+            <td data-label="Rarity">${weather.rarity || "Unknown"}</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold;">Visual Cue</td>
+            <td data-label="Visual Cue">${weather.visualCue || "None"}</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold;">Updated</td>
+            <td data-label="Updated">${updatedStr}</td>
+          </tr>
+        </tbody>
+      </table>
+    `;
+  } catch (e) {
+    weatherEl.innerHTML = `
+      <div class="section-title"><span class="emoji">❌</span>Weather</div>
+      <div style="color:red;">Weather unavailable</div>
+    `;
+    console.error('Weather fetch error:', e);
+  }
 }
 
 // Event listeners
@@ -339,6 +416,10 @@ fetchAndRender();
 setInterval(fetchAndRender, 5000);
 window.addEventListener("resize", fetchAndRender);
 
+// Weather section render
+fetchAndRenderWeatherSection();
+setInterval(fetchAndRenderWeatherSection, 5 * 60 * 1000);
+
 // API status
 async function checkApiStatus() {
   const apiStatusEl = document.getElementById("apiStatus");
@@ -363,47 +444,3 @@ async function checkApiStatus() {
 }
 checkApiStatus();
 setInterval(checkApiStatus, 15000);
-
-
-// Weather section (div-based, fully responsive)
-async function fetchAndRenderWeatherSection() {
-  const weatherEl = document.getElementById("weatherSection");
-  weatherEl.innerHTML = `
-    <div class="section-title"><span class="emoji">⏳</span>Weather</div>
-    <div>Loading...</div>
-  `;
-  try {
-    const corsProxy = "https://corsproxy.io/?";
-    const apiUrl = "https://growagardenstock.com/api/stock/weather";
-    const res = await fetch(corsProxy + encodeURIComponent(apiUrl));
-    if (!res.ok) throw new Error("Failed to fetch weather");
-    const weather = await res.json();
-
-    let updatedStr = "Unknown";
-    if (weather.updatedAt) {
-      updatedStr = typeof weather.updatedAt === "number"
-        ? new Date(weather.updatedAt).toLocaleString()
-        : weather.updatedAt;
-    }
-
-    weatherEl.innerHTML = `
-      <div class="section-title"><span class="emoji">${weather.icon || "🌤️"}</span>Weather</div>
-      <div class="section-content weather-content">
-        <div class="row"><div class="cell label">Status</div><div class="cell value">${weather.currentWeather || weather.weatherType || "Unknown"}</div></div>
-        <div class="row"><div class="cell label">Description</div><div class="cell value">${weather.description || weather.effectDescription || "None"}</div></div>
-        <div class="row"><div class="cell label">Crop Bonus</div><div class="cell value">${weather.cropBonuses || "None"}</div></div>
-        <div class="row"><div class="cell label">Rarity</div><div class="cell value">${weather.rarity || "Unknown"}</div></div>
-        <div class="row"><div class="cell label">Visual Cue</div><div class="cell value">${weather.visualCue || "None"}</div></div>
-        <div class="row"><div class="cell label">Updated</div><div class="cell value">${updatedStr}</div></div>
-      </div>
-    `;
-  } catch (e) {
-    weatherEl.innerHTML = `
-      <div class="section-title"><span class="emoji">❌</span>Weather</div>
-      <div style="color:red;">Weather unavailable</div>
-    `;
-    console.error('Weather fetch error:', e);
-  }
-}
-fetchAndRenderWeatherSection();
-setInterval(fetchAndRenderWeatherSection, 5 * 60 * 1000);

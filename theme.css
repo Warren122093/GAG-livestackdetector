@@ -487,8 +487,127 @@ tr:last-child td { border-bottom: none; }
   margin: 12px 0;
   font-size: 1.1em;
 }
+/* =======================
+   SECTION & WEATHER ONLY
+   ======================= */
+.sections {
+  width: 100%;
+  min-width: 0;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+.section {
+  margin: 28px 0 20px 0;
+  background: var(--secondary-bg);
+  border-radius: 12px;
+  padding: 14px 12px 12px 12px;
+  box-shadow: 0 2px 12px #0004;
+  transition: box-shadow 0.2s;
+  box-sizing: border-box;
+  width: 100%;
+  overflow-x: auto;
+  max-width: 100vw;
+}
+.section-title {
+  color: var(--accent2);
+  font-weight: bold;
+  font-size: 1.15em;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+}
+.section-title .emoji {
+  font-size: 1.35em;
+  margin-right: 7px;
+}
+.restock {
+  font-size: 1em;
+  color: var(--highlight);
+  margin-bottom: 10px;
+  display: block;
+  font-weight: 500;
+}
+.section .row {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 1em;
+}
+.section .row:last-child { border-bottom: none; }
 
-/* Responsive Table for Mobile */
+.section-content.weather-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.section-content.weather-content .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 8px 0;
+  border-bottom: 1px solid #ededed;
+  font-size: 1em;
+  gap: 14px;
+}
+.section-content.weather-content .row:last-child {
+  border-bottom: none;
+}
+.section-content.weather-content .cell.label {
+  min-width: 110px;
+  font-weight: bold;
+  color: var(--accent2);
+  flex-shrink: 0;
+  padding-right: 12px;
+  text-align: left;
+}
+.section-content.weather-content .cell.label:before,
+.section-content.weather-content .cell.label:after {
+  content: none !important;
+  display: none !important;
+}
+.section-content.weather-content .cell.value {
+  flex: 1;
+  color: var(--text-main);
+  word-break: break-word;
+  text-align: left;
+}
+
+/* Responsive Weather Section: stack vertically on narrow screens */
+@media (max-width: 700px) {
+  .section-content.weather-content .row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0 8px 0;
+    gap: 2px;
+  }
+  .section-content.weather-content .cell.label {
+    min-width: 0;
+    padding: 0 0 3px 0;
+    font-size: 1.06em;
+    color: var(--accent2);
+    text-align: left;
+  }
+  .section-content.weather-content .cell.value {
+    padding-bottom: 2px;
+    color: var(--text-main);
+    text-align: left;
+    width: 100%;
+  }
+  .section-content.weather-content .cell.label:before,
+  .section-content.weather-content .cell.label:after {
+    content: none !important;
+    display: none !important;
+  }
+  .section-content.weather-content .row:not(:last-child) {
+    margin-bottom: 8px;
+  }
+}
+
+/* Responsive Table for Mobile - NO LABEL, NO :BEFORE */
 @media (max-width: 550px) {
   .section table, .section thead, .section tbody, .section th, .section td, .section tr {
     display: block;
@@ -503,15 +622,12 @@ tr:last-child td { border-bottom: none; }
     position: relative;
     background: none;
   }
+  /* REMOVE ALL :before label prefixes for mobile! */
   .section td:before {
-    content: attr(data-label) ": ";
-    font-weight: bold;
-    color: var(--accent2);
-    display: inline-block;
-    min-width: 90px;
+    content: none !important;
+    display: none !important;
   }
 }
-
 /* Fix: Light Theme Table/Text Contrast */
 html[data-theme="light"] .section,
 html[data-theme="light"] table {
@@ -563,96 +679,3 @@ html[data-theme="light"] #aboutDevCloseBtn svg {
 ::-webkit-scrollbar { width: 8px; background: #222; }
 ::-webkit-scrollbar-thumb { background: #353; border-radius: 8px; }
 ::selection {background: #4be87a36;}
-
-
-/* Responsive Overlay Fix */
-#importantOverlay, #aboutDevOverlay {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  min-width: 0;
-  min-height: 0;
-  max-width: 100vw;
-  max-height: 100vh;
-  background: rgba(0,0,0,0.7);
-  align-items: center;
-  justify-content: center;
-  overflow-y: auto;
-  overflow-x: hidden;
-  box-sizing: border-box;
-}
-#importantOverlay > div, #aboutDevOverlay > div {
-  background: var(--card-color, #fff);
-  color: var(--primary-color, #2d6cdf);
-  border-radius: 12px;
-  padding: 28px 18px 18px 18px;
-  box-shadow: 0 4px 32px #000b;
-  max-width: 96vw;
-  width: 96vw;
-  min-width: 0;
-  max-height: 90vh;
-  min-height: 0;
-  overflow-y: auto;
-  text-align: center;
-  position: relative;
-  word-break: break-word;
-  box-sizing: border-box;
-}
-@media (max-width: 700px) {
-  #importantOverlay > div, #aboutDevOverlay > div {
-    max-width: 99vw;
-    width: 98vw;
-    padding: 18px 6px 12px 6px;
-    border-radius: 9px;
-    font-size: 1em;
-  }
-}
-@media (max-width: 480px) {
-  #importantOverlay > div, #aboutDevOverlay > div {
-    padding: 10px 2vw 8px 2vw;
-    max-width: 100vw;
-    width: 99vw;
-    border-radius: 6px;
-    font-size: .97em;
-    left: 0;
-    right: 0;
-    min-width: 0;
-  }
-  #overlayCloseBtn, #aboutDevCloseBtn {
-    right: 7px !important;
-    top: 4px !important;
-    font-size: 1.7em !important;
-  }
-}
-.section-content.weather-content .row {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 6px 0;
-  border-bottom: 1px solid #ededed;
-  font-size: 1em;
-}
-.section-content.weather-content .cell.label {
-  min-width: 110px;
-  font-weight: bold;
-  color: var(--primary-color, #2d6cdf);
-  flex-shrink: 0;
-}
-.section-content.weather-content .cell.value {
-  flex: 1;
-  color: var(--text-color, #18191a);
-  word-break: break-word;
-}
-@media (max-width: 600px) {
-  .section-content.weather-content .row {
-    flex-direction: column;
-    padding: 8px 0;
-  }
-  .section-content.weather-content .cell.label {
-    min-width: 0;
-    padding-bottom: 2px;
-  }
-}
