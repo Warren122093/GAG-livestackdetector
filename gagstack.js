@@ -364,7 +364,8 @@ async function checkApiStatus() {
 checkApiStatus();
 setInterval(checkApiStatus, 15000);
 
-// Weather section
+
+// Weather section (div-based, fully responsive)
 async function fetchAndRenderWeatherSection() {
   const weatherEl = document.getElementById("weatherSection");
   weatherEl.innerHTML = `
@@ -387,34 +388,14 @@ async function fetchAndRenderWeatherSection() {
 
     weatherEl.innerHTML = `
       <div class="section-title"><span class="emoji">${weather.icon || "🌤️"}</span>Weather</div>
-      <table>
-        <tbody>
-          <tr>
-            <td style="font-weight:bold;">Status</td>
-            <td>${weather.currentWeather || weather.weatherType || "Unknown"}</td>
-          </tr>
-          <tr>
-            <td style="font-weight:bold;">Description</td>
-            <td>${weather.description || weather.effectDescription || "None"}</td>
-          </tr>
-          <tr>
-            <td style="font-weight:bold;">Crop Bonus</td>
-            <td>${weather.cropBonuses || "None"}</td>
-          </tr>
-          <tr>
-            <td style="font-weight:bold;">Rarity</td>
-            <td>${weather.rarity || "Unknown"}</td>
-          </tr>
-          <tr>
-            <td style="font-weight:bold;">Visual Cue</td>
-            <td>${weather.visualCue || "None"}</td>
-          </tr>
-          <tr>
-            <td style="font-weight:bold;">Updated</td>
-            <td>${updatedStr}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="section-content weather-content">
+        <div class="row"><div class="cell label">Status</div><div class="cell value">${weather.currentWeather || weather.weatherType || "Unknown"}</div></div>
+        <div class="row"><div class="cell label">Description</div><div class="cell value">${weather.description || weather.effectDescription || "None"}</div></div>
+        <div class="row"><div class="cell label">Crop Bonus</div><div class="cell value">${weather.cropBonuses || "None"}</div></div>
+        <div class="row"><div class="cell label">Rarity</div><div class="cell value">${weather.rarity || "Unknown"}</div></div>
+        <div class="row"><div class="cell label">Visual Cue</div><div class="cell value">${weather.visualCue || "None"}</div></div>
+        <div class="row"><div class="cell label">Updated</div><div class="cell value">${updatedStr}</div></div>
+      </div>
     `;
   } catch (e) {
     weatherEl.innerHTML = `
